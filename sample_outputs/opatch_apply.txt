@@ -1,0 +1,31 @@
+$ cd /u01/stage/37501731
+$ $ORACLE_HOME/OPatch/opatch apply
+
+Oracle Interim Patch Installer version 12.2.0.1.42
+Copyright (c) 2024, Oracle Corporation.  All rights reserved.
+
+Oracle Home       : /u01/app/oracle/product/21.0.0/dbhome_1
+Central Inventory : /u01/app/oraInventory
+OPatch version    : 12.2.0.1.42
+
+Verifying environment and performing prerequisite checks...
+OPatch continues with these patches:   37501731
+
+Do you want to proceed? [y|n]
+y
+User Responded with: Y
+
+Applying interim patch '37501731' to OH '/u01/app/oracle/product/21.0.0/dbhome_1'
+Patching component oracle.rdbms, 21.0.0.0.0...
+Patching component oracle.rdbms.rsf, 21.0.0.0.0...
+Patching component oracle.rdbms.dbscripts, 21.0.0.0.0...
+
+Patch 37501731 successfully applied.
+Log file location: /u01/app/oracle/.../opatch/opatch2026-06-17_19-15-44PM_1.log
+
+OPatch succeeded.
+
+-- Read: the binary apply completed -- "Patch 37501731 successfully applied" / "OPatch
+-- succeeded." At this point the FILES in the home are patched but the DATABASE is not;
+-- the next step (datapatch) applies the matching SQL/dictionary changes. Do NOT open the
+-- database for application use until datapatch has run.

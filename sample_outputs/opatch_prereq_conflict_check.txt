@@ -1,0 +1,23 @@
+$ cd /u01/stage/37501731
+$ $ORACLE_HOME/OPatch/opatch prereq CheckConflictAgainstOHWithDetail -ph ./
+
+Oracle Interim Patch Installer version 12.2.0.1.42
+Copyright (c) 2024, Oracle Corporation.  All rights reserved.
+
+PREREQ session
+
+Oracle Home       : /u01/app/oracle/product/21.0.0/dbhome_1
+Central Inventory : /u01/app/oraInventory
+OPatch version    : 12.2.0.1.42
+Log file location : /u01/app/oracle/.../opatch/opatch2026-06-17_19-02-11PM_1.log
+
+Invoking prereq "checkconflictagainstohwithdetail"
+
+Prereq "checkConflictAgainstOHWithDetail" passed.
+
+OPatch succeeded.
+
+-- Read: the staged RU (37501731) has NO conflicts with what is already installed in the
+-- home, so the apply is safe to proceed. If this had reported a conflict, the window is
+-- No-Go until Oracle Support supplies a merged/replacement patch -- never apply over an
+-- unresolved conflict.

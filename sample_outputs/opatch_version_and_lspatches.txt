@@ -1,0 +1,25 @@
+$ $ORACLE_HOME/OPatch/opatch version
+
+OPatch Version: 12.2.0.1.42
+OPatch succeeded.
+
+------------------------------------------------------------------------------
+$ $ORACLE_HOME/OPatch/opatch lspatches    # BEFORE applying the new RU
+
+37260974;Database Release Update : 21.14.0.0.240716 (37260974)
+36912597;OJVM RELEASE UPDATE: 21.13.0.0.240416 (36912597)
+
+OPatch succeeded.
+
+------------------------------------------------------------------------------
+$ $ORACLE_HOME/OPatch/opatch lspatches    # AFTER applying the new RU
+
+37501731;Database Release Update : 21.15.0.0.241015 (37501731)
+36912597;OJVM RELEASE UPDATE: 21.13.0.0.240416 (36912597)
+
+OPatch succeeded.
+
+-- Read: OPatch 12.2.0.1.42 meets the RU minimum, so no OPatch upgrade was needed.
+-- Comparing before/after, the Database Release Update moved from 21.14 to 21.15 --
+-- exactly the intended change, and nothing else was disturbed. Capturing lspatches
+-- before AND after is how you prove what the window actually changed.

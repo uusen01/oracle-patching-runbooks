@@ -1,0 +1,38 @@
+$ cd $ORACLE_HOME/OPatch
+$ ./datapatch -verbose
+
+SQL Patching tool version 21.15.0.0.0 Production on Tue Jun 17 19:24:02 2026
+Copyright (c) 2012, 2024, Oracle.  All rights reserved.
+
+Connecting to database...OK
+Gathering database info...done
+
+Bootstrapping registry and package to current versions...done
+Determining current state...done
+
+Current state of interim SQL patches:  (none)
+Current state of release update SQL patches:
+  Binary registry: 21.15.0.0.0 Release_Update 241015 : Installed
+  PDB CDB$ROOT:  Applied 21.14.0.0.0 ... successfully
+  PDB PDB1:      Applied 21.14.0.0.0 ... successfully
+
+Adding patches to installation queue and performing prereq checks...done
+Installation queue:
+  For the following PDBs: CDB$ROOT PDB$SEED PDB1
+    Patch 37501731 (Database Release Update 21.15.0.0.241015):
+      Apply from 21.14.0.0.0 Release_Update to 21.15.0.0.0 Release_Update
+
+Installing patches...
+Patch installation complete.  Total patches installed: 3
+
+Validating logfiles...done
+Patch 37501731 apply (pdb CDB$ROOT): SUCCESS
+Patch 37501731 apply (pdb PDB$SEED): SUCCESS
+Patch 37501731 apply (pdb PDB1):     SUCCESS
+
+SQL Patching tool complete on Tue Jun 17 19:31:18 2026
+
+-- Read: datapatch applied the RU's SQL changes to the root, seed, and the open PDB,
+-- moving each from 21.14 to 21.15 with SUCCESS. In a CDB, datapatch handles every OPEN
+-- PDB automatically -- if a PDB had been closed it would be skipped, so confirm all PDBs
+-- are OPEN before running.

@@ -1,0 +1,28 @@
+# OPatch / datapatch / SQL*Plus logs (may contain real host/instance data)
+*.log
+*.lst
+*.trc
+opatch*/
+sqlpatch*/
+spool/
+
+# Local connection details / secrets
+tnsnames.ora
+sqlnet.ora
+*.env
+login.sql
+*passwd*
+*.pwd
+
+# Staged patch archives — do not commit Oracle patch binaries
+p*.zip
+*.tgz
+*.tar.gz
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/

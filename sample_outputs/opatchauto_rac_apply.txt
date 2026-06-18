@@ -1,0 +1,40 @@
+# Run as root on ONE node at a time (rolling). Example: node 1.
+# ./opatchauto apply /u01/stage/37501731
+
+OPatchauto session is initiated at Tue Jun 17 20:02:10 2026
+System initialization log: .../opatchautodb/systemconfig2026-06-17_08-02-15PM.log
+
+Performing prepatch operations on cluster nodes...
+Bringing down the local stack on node 'db-node-01'...
+  CRS service stopped on db-node-01
+
+Applying patch(es) to Oracle Grid Infrastructure home:
+  /u01/app/21.0.0/grid
+  Patch: 37501731 ... applied successfully
+
+Applying patch(es) to RDBMS home:
+  /u01/app/oracle/product/21.0.0/dbhome_1
+  Patch: 37501731 ... applied successfully
+
+Starting the local stack on node 'db-node-01'...
+  CRS service started on db-node-01
+
+OPatchAuto successful.
+--------------------------------Summary--------------------------------
+Patching is completed successfully. Node: db-node-01
+  GI Home: /u01/app/21.0.0/grid : Patch applied.
+  RDBMS Home: /u01/app/oracle/product/21.0.0/dbhome_1 : Patch applied.
+
+OPatchauto session completed at Tue Jun 17 20:38:54 2026
+
+# ---- Verify the node rejoined before moving to node 2 ----
+$ crsctl stat res -t | head
+Name           Target  State        Server       State details
+ora.DATA.dg    ONLINE  ONLINE       db-node-01   STABLE
+ora.LISTENER.lsnr ONLINE ONLINE     db-node-01   STABLE
+ora.demodb.db  ONLINE  ONLINE       db-node-01   Open,HOME=/u01/app/...
+
+-- Read: opatchauto stopped the local CRS stack on node 1, patched BOTH the GI and RDBMS
+-- homes, and restarted the stack -- node 1 is back ONLINE. The other nodes kept serving
+-- throughout (rolling). Confirm ONLINE here, then repeat on node 2, then node 3. Run
+-- datapatch ONCE after the final node, not per node.

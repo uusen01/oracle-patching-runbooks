@@ -1,0 +1,24 @@
+SQL> SELECT patch_id, version AS target_version, action, status,
+  2         TO_CHAR(action_time,'YYYY-MM-DD HH24:MI') AS action_time
+  3    FROM dba_registry_sqlpatch
+  4   ORDER BY action_time;
+
+  PATCH_ID TARGET_VERSION     ACTION     STATUS    ACTION_TIME
+---------- ------------------ ---------- --------- ----------------
+  36912597 21.13.0.0.0        APPLY      SUCCESS   2024-05-04 02:11
+  37260974 21.14.0.0.0        APPLY      SUCCESS   2024-08-03 01:48
+  37501731 21.15.0.0.0        APPLY      SUCCESS   2026-06-17 19:31
+
+SQL> SELECT comp_name, version, status FROM dba_registry ORDER BY comp_name;
+
+COMP_NAME                                VERSION        STATUS
+---------------------------------------- -------------- -------
+Oracle Database Catalog Views            21.0.0.0.0     VALID
+Oracle Database Packages and Types       21.0.0.0.0     VALID
+Oracle Real Application Clusters         21.0.0.0.0     VALID
+Oracle XML Database                      21.0.0.0.0     VALID
+
+-- Read: the new RU (37501731 -> 21.15) is registered with ACTION=APPLY, STATUS=SUCCESS,
+-- sitting after the prior quarterly RUs -- a clean patch history. All registry
+-- components are VALID. This is the authoritative confirmation that the database side of
+-- the patch took effect, complementing opatch lspatches on the binary side.

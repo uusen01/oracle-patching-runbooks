@@ -1,0 +1,32 @@
+-- EMERGENCY: patch left the database unstable; revert to the pre-patch restore point.
+
+SQL> SELECT name, guarantee_flashback_database, time
+  2    FROM v$restore_point;
+
+NAME                 GUA TIME
+-------------------- --- ------------------------------
+PRE_RU_21_15         YES 17-JUN-2026 18.55.04
+
+SQL> SHUTDOWN ABORT;
+ORACLE instance shut down.
+
+SQL> STARTUP MOUNT;
+ORACLE instance started.
+Database mounted.
+
+SQL> FLASHBACK DATABASE TO RESTORE POINT PRE_RU_21_15;
+Flashback complete.
+
+SQL> ALTER DATABASE OPEN RESETLOGS;
+Database altered.
+
+SQL> SELECT open_mode FROM v$database;
+OPEN_MODE
+--------------------
+READ WRITE
+
+-- Read: production was restored in minutes by flashing the whole database back to the
+-- guaranteed restore point taken just before patching, then OPEN RESETLOGS. NOTE: this
+-- reverts the DATABASE, not the BINARIES -- if the 21.15 binary patch is still in the
+-- home, follow up with opatch rollback so binary and dictionary levels match, then take
+-- a fresh full backup. Service first; reconcile second.

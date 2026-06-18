@@ -1,0 +1,35 @@
+$ $ORACLE_HOME/OPatch/opatch rollback -id 37501731
+
+Oracle Interim Patch Installer version 12.2.0.1.42
+Copyright (c) 2024, Oracle Corporation.  All rights reserved.
+
+Oracle Home       : /u01/app/oracle/product/21.0.0/dbhome_1
+OPatch version    : 12.2.0.1.42
+
+RollbackSession rolling back interim patch '37501731' from OH
+  '/u01/app/oracle/product/21.0.0/dbhome_1'
+
+Patching component oracle.rdbms, 21.0.0.0.0...
+Patching component oracle.rdbms.rsf, 21.0.0.0.0...
+
+RollbackSession removed interim patch '37501731' from inventory
+
+Patch 37501731 successfully rolled back.
+OPatch succeeded.
+
+# ---- Reverse the SQL changes after restart ----
+$ ./datapatch -verbose
+...
+Patch 37501731 rollback (pdb CDB$ROOT): SUCCESS
+Patch 37501731 rollback (pdb PDB1):     SUCCESS
+SQL Patching tool complete.
+
+$ $ORACLE_HOME/OPatch/opatch lspatches
+36912597;OJVM RELEASE UPDATE: 21.13.0.0.240416 (36912597)
+37260974;Database Release Update : 21.14.0.0.240716 (37260974)
+OPatch succeeded.
+
+-- Read: a clean planned rollback -- opatch removed the 21.15 binary patch, then datapatch
+-- reversed the matching SQL changes (rollback SUCCESS per PDB), returning the database to
+-- 21.14. lspatches confirms 37501731 is gone and the prior RU is the current level.
+-- Binary and dictionary levels are consistent again -- the rule that must always hold.
