@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="screenshots/oracle-patching-runbooks-banner.png" width="100%">
+</p>
+
 # Oracle Patching Runbooks
 
 Battle-tested **operational runbooks** for patching Oracle databases — quarterly Release
